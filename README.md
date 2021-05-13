@@ -1,1 +1,1 @@
-# LFIs
+# Encoding of Algebraic Semantics for LFIs

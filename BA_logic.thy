@@ -23,12 +23,12 @@ definition bottom::"\<sigma>" ("\<^bold>\<bottom>") where "\<^bold>\<bottom> \<e
 definition impl::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infixr "\<^bold>\<rightarrow>" 51) where "A \<^bold>\<rightarrow> B \<equiv> \<lambda>w. (A w)\<longrightarrow>(B w)"
 definition dimp::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infixr "\<^bold>\<leftrightarrow>" 51) where "A \<^bold>\<leftrightarrow> B \<equiv> \<lambda>w. (A w)\<longleftrightarrow>(B w)"
 definition diff::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infixr "\<^bold>\<leftharpoonup>" 51) where "A \<^bold>\<leftharpoonup> B \<equiv> \<lambda>w. (A w) \<and> \<not>(B w)"
-definition compl::"\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<midarrow>_" [57]58) where "\<^bold>\<midarrow>A  \<equiv> \<lambda>w. \<not>(A w)"
+definition compl::"\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<sim>_" [57]58) where "\<^bold>\<sim>A  \<equiv> \<lambda>w. \<not>(A w)"
 
 (**In fact the algebra is atomic (because of the presence of primitive equality in HOL)
 This indirect restriction to atomic algebras does not influence our results
 (see arxiv.org/abs/2104.04284 for a discussion).*)
-definition "atom a \<equiv> \<not>(a \<^bold>\<approx> \<^bold>\<bottom>) \<and> (\<forall>p. a \<^bold>\<preceq> p \<or> a \<^bold>\<preceq> \<^bold>\<midarrow>p)"
+definition "atom a \<equiv> \<not>(a \<^bold>\<approx> \<^bold>\<bottom>) \<and> (\<forall>p. a \<^bold>\<preceq> p \<or> a \<^bold>\<preceq> \<^bold>\<sim>p)"
 lemma atomic: "\<forall>w. \<exists>q. q w \<and> atom(q)" using the_sym_eq_trivial by (metis (full_types) atom_def compl_def bottom_def)
 
 
