@@ -3,6 +3,12 @@ theory BA_logic
 begin
 nitpick_params[assms=true, user_axioms=true, show_all, expect=genuine, format=3] (*default Nitpick settings*)
 
+(** Remarks on notation:
+Isabelle/HOL operators are: \<forall>, \<exists>, \<and>, \<or>, \<longrightarrow>, \<longleftrightarrow>, \<not>.
+The symbol \<Longrightarrow> is Isabelle's metalogical turnstile.
+Object-logical operators are written in bold symbols (e.g. \<^bold>\<forall>, \<^bold>\<and>, \<^bold>\<rightarrow>, \<^bold>\<sim>, \<^bold>\<not>).
+*)
+
 (**We introduce a type w for the domain of points (aka. 'worlds', 'states', etc.).
 \<sigma> is a type alias for sets of points (i.e. propositions) encoded as characteristic functions.*)
 typedecl w                  
@@ -24,6 +30,10 @@ definition impl::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infixr "\
 definition dimp::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infixr "\<^bold>\<leftrightarrow>" 51) where "A \<^bold>\<leftrightarrow> B \<equiv> \<lambda>w. (A w)\<longleftrightarrow>(B w)"
 definition diff::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infixr "\<^bold>\<leftharpoonup>" 51) where "A \<^bold>\<leftharpoonup> B \<equiv> \<lambda>w. (A w) \<and> \<not>(B w)"
 definition compl::"\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<sim>_" [57]58) where "\<^bold>\<sim>A  \<equiv> \<lambda>w. \<not>(A w)"
+
+named_theorems conn (*algebraic connectives*)
+declare meet_def[conn] join_def[conn] top_def[conn] bottom_def[conn]
+        impl_def[conn] dimp_def[conn] diff_def[conn] compl_def[conn]
 
 (**In fact the algebra is atomic (because of the presence of primitive equality in HOL)
 This indirect restriction to atomic algebras does not influence our results
